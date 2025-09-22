@@ -16,17 +16,15 @@ def send_request(target_url):
         ]
     }
     try:
-        # Record start time
         start_time = time.time()
         response = requests.post(target_url, json=data)
         
         if response.status_code == 200:
-            # Record response time and calculate latency
             response_time = time.time()
             latency = round((response_time - start_time) * 1000, 5)
             print(latency)
     except Exception:
-        pass  # Ignore failed requests
+        pass 
 
 def send_requests_for_duration(target_url, duration, rps):
     end_time = time.time() + duration
@@ -41,7 +39,7 @@ def send_requests_for_duration(target_url, duration, rps):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python my_test.py <Duration_in_seconds> <Requests_per_second>")
+        print("Usage: python3 http.py <Duration_in_seconds> <Requests_per_second>")
         sys.exit(1)
 
     duration = int(sys.argv[1])
