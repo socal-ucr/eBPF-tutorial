@@ -126,49 +126,49 @@ Once these steps are complete, Docker will be ready for running containers, and 
 
 In this step, we will set up Docker containers for the Triton server and client, and configure the example model repository.
 
-### 1. Run Triton Server in Docker
+1. **Run Triton Server in Docker**
 
-To begin, clone the `server` repository to get the example model repository and set it up.
-
-```bash
-git clone -b r25.08 https://github.com/triton-inference-server/server.git
-cd server/docs/examples
+  To begin, clone the `server` repository to get the example model repository and set it up.
+  
+  ```bash
+  git clone -b r25.08 https://github.com/triton-inference-server/server.git
+  cd server/docs/examples
 ```
 
-### 2. Fetch the Models
+2. **Fetch the Models**
 
-Run the script to fetch the models:
+  Run the script to fetch the models:
+  
+  ```bash
+  ./fetch_models.sh
+  ```
 
-```bash
-./fetch_models.sh
-```
+3. **Run Triton Server in Docker**
 
-### 3. Run Triton Server in Docker
+  Now, run the Triton server in a Docker container. Make sure that the model repository is correctly mapped to the container. Run the following command:
+  
+  ```bash
+  docker run -it --net=host --pid=host --name=triton-server -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:25.08-py3 tritonserver --model-repository=/models
+  ```
+  
+  This will start the Triton server and load the models from the model_repository.
 
-Now, run the Triton server in a Docker container. Make sure that the model repository is correctly mapped to the container. Run the following command:
+4. **Verify Triton Server is Running**
 
-```bash
-docker run -it --net=host --pid=host --name=triton-server -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:25.08-py3 tritonserver --model-repository=/models
-```
+  After starting the server, you should see logs in the terminal indicating that the Triton server has successfully started. The server should now be running and ready to serve the models.
 
-This will start the Triton server and load the models from the model_repository.
+5. **Run Triton Client in Docker**
 
-### 4. Verify Triton Server is Running
+  To interact with the Triton server, you need the Triton client. Pull the Docker image for the Triton SDK:
 
-After starting the server, you should see logs in the terminal indicating that the Triton server has successfully started. The server should now be running and ready to serve the models.
+  ```bash
+  docker pull nvcr.io/nvidia/tritonserver:25.08-py3-sdk
+  ```
 
-### 5. Run Triton Client in Docker
+  Once the image is pulled, run the Triton client in Docker:
 
-To interact with the Triton server, you need the Triton client. Pull the Docker image for the Triton SDK:
-
-```bash
-docker pull nvcr.io/nvidia/tritonserver:25.08-py3-sdk
-```
-
-Once the image is pulled, run the Triton client in Docker:
-
-```bash
-docker run -it --net=host --pid=host --name=triton-client -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:25.08-py3-sdk
-```
-This command will start the Triton client, and it will be able to interact with the server running on your system.
+  ```bash
+  docker run -it --net=host --pid=host --name=triton-client -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:25.08-py3-sdk
+  ```
+  This command starts the Triton client, allowing it to interact with the server running on your system.
 
