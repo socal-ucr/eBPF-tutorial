@@ -174,17 +174,19 @@ In this step, we will set up Docker containers for the Triton server and client,
 
 ## Step 7: Locate the Triton binary inside Docker’s overlay2(For uprobes)
 
-    ```bash
-    docker info | grep "Docker Root Dir"
-    # Example: /var/snap/docker/common/var-lib-docker
-    ```
+For hooking user space probes we need to find the triton binary file. The binary files of the docker containers are generally located inside the `overlay2` directory. To locate the `overlay2` directory run the following command:
+```bash
+docker info | grep "Docker Root Dir"
+# Example: /var/snap/docker/common/var-lib-docker
+```
 
-    ```bash
-    cd /var/snap/docker/common/var-lib-docker/overlay2
-    find . -type f -name "tritonserver"
-    ```
+Using the following command, find the specific binary file for the `tritonserver`:
+```bash
+cd /var/snap/docker/common/var-lib-docker/overlay2
+find . -type f -name "tritonserver"
+```
     
-    ```bash
-    # Example result:
-    /var/snap/docker/common/var-lib-docker/overlay2/6f3e90...dd0f/diff/opt/tritonserver/bin/tritonserver
-    ```
+```bash
+# Example result:
+/var/snap/docker/common/var-lib-docker/overlay2/6f3e90...dd0f/diff/opt/tritonserver/bin/tritonserver
+```
