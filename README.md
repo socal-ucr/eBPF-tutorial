@@ -172,3 +172,19 @@ In this step, we will set up Docker containers for the Triton server and client,
   ```
   This command starts the Triton client, allowing it to interact with the server running on your system.
 
+## Step 7: Locate the Triton binary inside Docker’s overlay2(For uprobes)
+
+    ```bash
+    docker info | grep "Docker Root Dir"
+    # Example: /var/snap/docker/common/var-lib-docker
+    ```
+
+    ```bash
+    cd /var/snap/docker/common/var-lib-docker/overlay2
+    find . -type f -name "tritonserver"
+    ```
+    
+    ```bash
+    # Example result:
+    /var/snap/docker/common/var-lib-docker/overlay2/6f3e90...dd0f/diff/opt/tritonserver/bin/tritonserver
+    ```
