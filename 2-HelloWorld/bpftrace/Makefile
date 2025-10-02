@@ -1,4 +1,4 @@
-TARGETS = hello hello-func
+TARGETS = helloWorld
 
 all: $(TARGETS)
 .PHONY: all
