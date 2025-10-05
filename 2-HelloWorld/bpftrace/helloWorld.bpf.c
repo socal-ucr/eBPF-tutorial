@@ -6,7 +6,7 @@ int counter = 0;
 SEC("xdp")
 int helloWorld(struct xdp_md *ctx) {
     bpf_printk("Hello World %d", counter);
-    counter++; 
+    counter++;
     return XDP_PASS;
 }
 

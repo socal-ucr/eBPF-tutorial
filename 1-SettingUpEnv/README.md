@@ -1,5 +1,17 @@
+##
+
+- Assume they have access to terminal
+  - Create a readme so they can follow if they don't know
+- Create the appropriate conda env
+- Install BCC, bpftool and bpftrace
+- Install docker
+- Install clang and compilers
+- DON'T INSTALL THE CONTAINERS
+
 # Installing BCC
 [BCC](https://github.com/iovisor/bcc/blob/master/INSTALL.md#ubuntu---source:~:text=%23%20For%20Noble%20Numbat%20(24.04)%0Asudo%20apt%20install%20%2Dy%20zip%20bison%20build%2Dessential%20cmake%20flex%20git%20libedit%2Ddev%20%5C%0A%20%20libllvm18%20llvm%2D18%2Ddev%20libclang%2D18%2Ddev%20python3%20zlib1g%2Ddev%20libelf%2Ddev%20libfl%2Ddev%20python3%2Dsetuptools%20%5C%0A%20%20liblzma%2Ddev%20libdebuginfod%2Ddev%20arping%20netperf%20iperf%20libpolly%2D18%2Ddev)
+
+installed using tag v0.35.0
 
 # Building libbpf and installing header files
 
@@ -24,16 +36,28 @@ cd ../..
 cd 2-HelloWorld/bpftrace
 make
 
-file hello.bpf.o
+file helloWorld.bpf.o
 llvm-objdump-18 -S helloWorld.bpf.o
 
 sudo bpftool prog load helloWorld.bpf.o /sys/fs/bpf/helloWorld
+sudo bpftool prog load helloWorld.bpf.o /sys/fs/bpf/helloWorld autoattch
 sudo ls /sys/fs/bpf/
 sudo bpftool prog list
+sudo bpftool prog list name helloWorld
 sudo bpftool prog show id {ID} --pretty
 sudo bpftool prog dump xlated name helloWorld
 
+ip link
+
+sudo bpftool net attach xdp id {ID} dev lo
 sudo bpftool net list 
+sudo cat /sys/kernel/debug/tracing/trace_pipe
+
+sudo bpftool map list
+
+sudo bpftool net detach xdp dev lo
+
+sudo rm /sys/fs/bpf/helloWorld
 ```
 
 XDP is empty. Change it to syscall
