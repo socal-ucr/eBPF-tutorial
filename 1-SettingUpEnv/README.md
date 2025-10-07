@@ -26,38 +26,8 @@ Libbpf is included as a submodule in this repo. You'll need to build and install
 it for the C-based examples to build correctly. (See libbpf/README.md for more
 details.)
 
-```sh
-cd libbpf/src
-make install 
-cd ../..
-```
 
-```sh
-cd 2-HelloWorld/bpftrace
-make
 
-file helloWorld.bpf.o
-llvm-objdump-18 -S helloWorld.bpf.o
+REMOVE TOP
 
-sudo bpftool prog load helloWorld.bpf.o /sys/fs/bpf/helloWorld
-sudo bpftool prog load helloWorld.bpf.o /sys/fs/bpf/helloWorld autoattch
-sudo ls /sys/fs/bpf/
-sudo bpftool prog list
-sudo bpftool prog list name helloWorld
-sudo bpftool prog show id {ID} --pretty
-sudo bpftool prog dump xlated name helloWorld
-
-ip link
-
-sudo bpftool net attach xdp id {ID} dev lo
-sudo bpftool net list 
-sudo cat /sys/kernel/debug/tracing/trace_pipe
-
-sudo bpftool map list
-
-sudo bpftool net detach xdp dev lo
-
-sudo rm /sys/fs/bpf/helloWorld
-```
-
-XDP is empty. Change it to syscall
+explain the environment they have in server. Things that are installed and conda they are using.
