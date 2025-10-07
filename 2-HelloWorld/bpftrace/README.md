@@ -54,10 +54,6 @@ Using the `Makefile` provided in this directory, just run:
 ```sh
 make
 ```
-Otherwise, you can manually compile it with:
-```sh
-clang -O2 -target bpf -c helloWorld.c -o helloWorld.bpf.o
-```
 
 ## Inspecting the Compiled eBPF Object File
 
