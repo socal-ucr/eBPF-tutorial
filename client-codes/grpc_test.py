@@ -53,3 +53,4 @@ if __name__ == "__main__":
 
     print(f"Running for {duration} seconds at {DEFAULT_RPS} requests/second...")
     send_requests_for_duration(grpc_client, model_name, duration)
+
