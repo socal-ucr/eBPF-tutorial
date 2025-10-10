@@ -1,4 +1,4 @@
-## Locate the Triton binary inside Docker’s overlay2(For uprobes)
+## Locate the Triton binary inside Docker’s overlay2
 
 For hooking user space probes we need to find the triton binary file. The binary files of the docker containers are generally located inside the `overlay2` directory. To locate the `overlay2` directory run the following command:
 ```bash
@@ -16,7 +16,7 @@ find /var/lib/docker/overlay2/ -type f -name "tritonserver"
 /var/lib/docker/overlay2/6f3e90...dd0f/diff/opt/tritonserver/bin/tritonserver
 ```
 
-## Look for the function symbol in our target binary
+## Look for the function symbol in the target binary
 
 This shows all the symbols for a specific function.
 ```bash
@@ -27,4 +27,5 @@ This command demangles the function symbol to match it with the actual function 
 ```bash
 echo <symbol> | c++filt
 ```
+
 
