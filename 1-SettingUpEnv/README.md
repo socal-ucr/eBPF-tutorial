@@ -1,33 +1,47 @@
-##
+# eBPF Environment Setup Guide
 
-- Assume they have access to terminal
-  - Create a readme so they can follow if they don't know
-- Create the appropriate conda env
-- Install BCC, bpftool and bpftrace
-- Install docker
-- Install clang and compilers
-- DON'T INSTALL THE CONTAINERS
+## Update System and Install Required Dependencies
 
-# Installing BCC
-[BCC](https://github.com/iovisor/bcc/blob/master/INSTALL.md#ubuntu---source:~:text=%23%20For%20Noble%20Numbat%20(24.04)%0Asudo%20apt%20install%20%2Dy%20zip%20bison%20build%2Dessential%20cmake%20flex%20git%20libedit%2Ddev%20%5C%0A%20%20libllvm18%20llvm%2D18%2Ddev%20libclang%2D18%2Ddev%20python3%20zlib1g%2Ddev%20libelf%2Ddev%20libfl%2Ddev%20python3%2Dsetuptools%20%5C%0A%20%20liblzma%2Ddev%20libdebuginfod%2Ddev%20arping%20netperf%20iperf%20libpolly%2D18%2Ddev)
+To begin, update your system and install the required dependencies for eBPF development. This includes `linux-tools-common`, `linux-tools-generic`, and the necessary kernel-specific tools. 
 
-installed using tag v0.35.0
+`bpftool` is a utility that helps you manage and inspect eBPF programs. Install it by running the following commands:
 
-# Building libbpf and installing header files
+### For Ubuntu/Debian-based systems:
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)
+```
 
-- installed bpftool
-- installed pkg-config 
-- installed lib-elf-dev
-- installed build-essential
-- installed clang
-- installed file
+### Building bpftool from Source (if needed)
 
-Libbpf is included as a submodule in this repo. You'll need to build and install
-it for the C-based examples to build correctly. (See libbpf/README.md for more
-details.)
+If the package installation doesn't work or you need the latest version, you can build `bpftool` from source:
 
+```bash
+cd ..
+git clone --recurse-submodules https://github.com/libbpf/bpftool.git
+cd bpftool/src 
+make install 
+```
 
+Alternatively, pre-built `bpftool` binaries are available from [https://github.com/libbpf/bpftool/releases](https://github.com/libbpf/bpftool/releases).
 
-REMOVE TOP
+## Step 2: Install BCC
 
-explain the environment they have in server. Things that are installed and conda they are using.
+BCC (BPF Compiler Collection) provides tools and libraries for working with eBPF. Please follow the installation guide in the [BCC GitHub repository](https://github.com/iovisor/bcc/blob/master/INSTALL.md).
+
+## Step 3: Install bpftrace
+
+For advanced tracing of kernel events using eBPF, you can install `bpftrace`. This high-level tracing tool makes it easy to attach eBPF programs to tracepoints, function calls, and more.
+
+### For Ubuntu/Debian-based systems:
+```bash
+sudo apt install bpfcc-tools bpftrace
+```
+## Additional Dependencies
+
+For the purposes of this tutorial, additional packages such as `pkg-config`, `libelf-dev`, `build-essential`, `clang`, and `file` are installed on the server as well.
+
+## Install libbpf
+
+`libbpf` is included as a submodule in this repository. You'll need to build and install it for the C-based examples to build correctly. See `libbpf/README.md` for more details.
+
