@@ -37,7 +37,7 @@ def init_benchmark(container_name):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Trace gRPC function calls")
-    parser.add_argument("--container", required=True, help="Container name")
+    parser.add_argument("-c", "--container", required=True, help="Container name")
     args = parser.parse_args()
 
     try:
