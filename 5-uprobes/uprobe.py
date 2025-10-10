@@ -16,8 +16,6 @@ bpf_text = """
 #include <uapi/linux/ptrace.h>
 #include <linux/sched.h>
 
-BPF_RINGBUF_OUTPUT(events, 8);
-
 // Uprobe: grpc_chttp2_maybe_complete_recv_trailing_metadata
 int trace_metadata_func(struct pt_regs *ctx) {
     u32 pid = bpf_get_current_pid_tgid() >> 32;
