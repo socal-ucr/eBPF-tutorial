@@ -5,7 +5,6 @@ In this section, you’ll learn how to write, compile, and load a simple eBPF pr
 [bpftrace](https://github.com/bpftrace/bpftrace) is already installed in the servers given to you.
 Please visit [bpftrace](https://github.com/bpftrace/bpftrace) github for more information.
 
-bpftrace and bpftool are already installed on the provided servers.
 If you’d like to learn more about the tools, refer to the [bpftrace GitHub page](https://github.com/bpftrace/bpftrace) and the [bpftool documentation](https://bpftool.dev/).
 
 ## Starting with bpftrace
@@ -78,10 +77,21 @@ sudo bpftool prog load helloWorld.bpf.o /sys/fs/bpf/helloWorld
 Check that it was successfully loaded:
 
 ```sh
-sudo bpftool prog load helloWorld.bpf.o /sys/fs/bpf/helloWorld
 sudo ls /sys/fs/bpf/
+```
+
+The bpftool utility can list all the programs that are loaded into the kernel. If you try this yourself you’ll probably see several preexisting eBPF programs in this output:
+```sh
 sudo bpftool prog list
+```
+
+You can also filter these programs by name to only list our helloWorld program:
+```sh
 sudo bpftool prog list name helloWorld
+```
+
+The program will be assigned a unique **{ID}**. This identity is a number assigned to each program as it’s loaded. Knowing the ID, you can ask bpftool to show more information about this program. This time, let’s get the output in prettified JSON format so that the field names are visible, as well as the values:
+```sh
 sudo bpftool prog show id {ID} --pretty
 ```
 
@@ -91,7 +101,7 @@ sudo bpftool prog dump xlated name helloWorld
 ```
 
 ## Attaching the Program
-Find your network interfaces:
+We first need to find a network interface to attach our XDP program too. To find your network interfaces:
 ```sh
 ip link
 ```
