@@ -34,7 +34,7 @@ bpftool v7.4.0
 
 If you see this message, `bpftool` is correctly installed and ready to use.
 
-## Step 3: Install bpftrace (Optional)
+## Step 3: Install bpftrace
 
 For advanced tracing of kernel events using eBPF, you can install `bpftrace`. This high-level tracing tool makes it easy to attach eBPF programs to tracepoints, function calls, and more.
 
