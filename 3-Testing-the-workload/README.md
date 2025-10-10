@@ -7,7 +7,7 @@ In this step, we will set up Docker containers for the Triton server and client,
   To begin, clone the `server` repository to get the example model repository and set it up.
   
   ```bash
-  git clone -b r25.08 https://github.com/triton-inference-server/server.git
+  git clone -b r24.08 https://github.com/triton-inference-server/server.git
   cd server/docs/examples
 ```
 
@@ -18,13 +18,14 @@ In this step, we will set up Docker containers for the Triton server and client,
   ```bash
   ./fetch_models.sh
   ```
+  If the script fails, change the download link from [here](https://github.com/triton-inference-server/server/pull/7621/files) and run it again.
 
 3. **Run Triton Server in Docker**
 
   Now, run the Triton server in a Docker container. Make sure that the model repository is correctly mapped to the container. Run the following command:
   
   ```bash
-  docker run -it --net=host --pid=host --name=triton-server -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:25.08-py3 tritonserver --model-repository=/models
+  docker run -it --net=host --pid=host --name=triton-server -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:24.08-py3 tritonserver --model-repository=/models
   ```
   
   This will start the Triton server and load the models from the model_repository.
@@ -38,12 +39,13 @@ In this step, we will set up Docker containers for the Triton server and client,
   To interact with the Triton server, you need the Triton client. Pull the Docker image for the Triton SDK:
 
   ```bash
-  docker pull nvcr.io/nvidia/tritonserver:25.08-py3-sdk
+  docker pull nvcr.io/nvidia/tritonserver:24.08-py3-sdk
   ```
 
   Once the image is pulled, run the Triton client in Docker:
 
   ```bash
-  docker run -it --net=host --pid=host --name=triton-client -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:25.08-py3-sdk
+  docker run -it --net=host --pid=host --name=triton-client -v ${PWD}/server/docs/examples/model_repository:/models nvcr.io/nvidia/tritonserver:24.08-py3-sdk
   ```
   This command starts the Triton client, allowing it to interact with the server running on your system.
+
