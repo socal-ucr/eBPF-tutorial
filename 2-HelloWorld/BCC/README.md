@@ -4,8 +4,6 @@ In this section, we’ll use [**BCC (BPF Compiler Collection)**](https://github.
 
 BCC provides convenient Python and C++ APIs to write, compile, and attach eBPF programs dynamically, making it easier to prototype and explore kernel events.
 
-
-
 ## Verifying Installation
 
 BCC is already installed on the provided server.
