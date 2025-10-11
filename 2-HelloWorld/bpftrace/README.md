@@ -90,9 +90,11 @@ You can also filter these programs by name to only list our helloWorld program:
 sudo bpftool prog list name helloWorld
 ```
 
-The program will be assigned a unique **{ID}**. This identity is a number assigned to each program as it’s loaded. Knowing the ID, you can ask bpftool to show more information about this program. This time, let’s get the output in prettified JSON format so that the field names are visible, as well as the values:
+Our helloWorld program will be assigned a unique **$ID$**. Extract this **$ID$** from the output of `sudo bpftool prog list name helloWorld` to use for the rest of the experiment. 
+
+This identity is a number assigned to each program as it’s loaded. Knowing the ID, you can ask bpftool to show more information about this program. This time, let’s get the output in prettified JSON format so that the field names are visible, as well as the values:
 ```sh
-sudo bpftool prog show id {ID} --pretty
+sudo bpftool prog show id $ID$ --pretty
 ```
 
 You can also see the translated instructions:
