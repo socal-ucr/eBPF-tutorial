@@ -4,7 +4,9 @@ import sys
 
 program = r"""
 int hello(void *ctx) {
-    bpf_trace_printk("Hello World!");
+    
+    // Print "Hello World!" using bpf_trace_printk.
+    
     return 0;
 }
 """
